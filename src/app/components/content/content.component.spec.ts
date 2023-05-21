@@ -14,7 +14,15 @@ describe('Componente: Content', () => {
 
   it('Deve criar o componente', () => {
     let fixture = TestBed.createComponent(ContentComponent);
-    let app = fixture.debugElement.componentInstance;
+    let app = fixture.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it('Deve chamar carregarNotificacoes com sucesso', () => {
+    let fixture = TestBed.createComponent(ContentComponent);
+    let app = fixture.componentInstance;
+    spyOn(app, 'carregarNotificacoes');
+    app.ngOnInit();
+    expect(app.carregarNotificacoes).toHaveBeenCalled();
   });
 });
