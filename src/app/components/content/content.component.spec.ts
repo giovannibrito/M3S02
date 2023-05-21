@@ -77,4 +77,15 @@ describe('Componente: Content', () => {
     app.carregarNotificacoes();
     expect(app.listaDeNotificacoes).toEqual(NOTIFICATIONS_MOCK);
   });
+
+  it('removerNotificacao - Deve chamar atualizarLista com sucesso', () => {
+    let fixture = TestBed.createComponent(ContentComponent);
+    let app = fixture.componentInstance;
+    spyOn(app, 'atualizarLista');
+    notificationService.removeNotification.and.returnValue(of({}));
+
+    app.removerNotificacao(1);
+
+    expect(app.atualizarLista).toHaveBeenCalled();
+  });
 });
