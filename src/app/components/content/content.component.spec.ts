@@ -54,4 +54,13 @@ describe('Componente: Content', () => {
 
     expect(app.atualizarLista).toHaveBeenCalled();
   });
+
+  it('atualizarLista - Deve chamar carregarNotificacoes com sucesso', () => {
+    let fixture = TestBed.createComponent(ContentComponent);
+    let app = fixture.componentInstance;
+    spyOn(app, 'carregarNotificacoes');
+    app.atualizarLista();
+
+    expect(app.carregarNotificacoes).toHaveBeenCalled();
+  });
 });
