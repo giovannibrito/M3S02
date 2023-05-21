@@ -5,10 +5,13 @@ import { NotificationAddComponent } from '../notification-add/notification-add.c
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from 'src/app/services/notification.service';
 import { of } from 'rxjs';
+import { NOTIFICATIONS_MOCK } from 'src/app/utils/notifications-mock';
 
 describe('Componente: Content', () => {
   let notificationService = jasmine.createSpyObj(NotificationService, [
     'getNotifications',
+    'getNotificationsApi',
+    'addNotificationApi',
     'editNotificationApi',
     'removeNotification',
   ]);
@@ -62,5 +65,16 @@ describe('Componente: Content', () => {
     app.atualizarLista();
 
     expect(app.carregarNotificacoes).toHaveBeenCalled();
+  });
+
+  it('carregarNotificacoes - Deve retornar valores para listaDeNotificacoes com sucesso', () => {
+    let fixture = TestBed.createComponent(ContentComponent);
+    let app = fixture.componentInstance;
+    notificationService.getNotificationsApi.and.returnValue(
+      of(NOTIFICATIONS_MOCK)
+    );
+
+    app.carregarNotificacoes();
+    expect(app.listaDeNotificacoes).toEqual(NOTIFICATIONS_MOCK);
   });
 });
