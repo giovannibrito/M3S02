@@ -1,10 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { NotificationService } from './notification.service';
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NOTIFICATIONS_MOCK } from '../utils/notifications-mock';
 import { INotificacao } from '../models/notificacao.model';
@@ -37,6 +36,16 @@ describe('NotificationService', () => {
     );
 
     expect(resultado.request.method).toEqual('GET');
+  });
+
+  it('getNotifications - deve retornar o mock de notificacoes', () => {
+    let mock: INotificacao[] = [];
+
+    notificationService.getNotifications().subscribe((data) => {
+      mock = data;
+    });
+
+    expect(mock).toEqual(NOTIFICATIONS_MOCK);
   });
 
   it('addNotificationApi - deve adicionar um objeto com sucesso', () => {
